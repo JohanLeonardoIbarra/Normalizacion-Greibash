@@ -3,15 +3,18 @@ class Modelo {
   producciones;
   terminales;
 
+  inicial = "";
+
   nulas = [];
+  produccionesTerminales = [];
 
-  alfabetoEliminado = [];
-  produccionesEliminadas = [];
+  alfabetoAuxiliar = [];
+  produccionesAuxiliares = [];
 
-  alfabetoEliminadoT = [];
-  produccionesEliminadasT = [];
+  chomskyVar = 1;
 
-  constructor(alfabeto, producciones, terminales) {
+  constructor(alfabeto, inicial, producciones, terminales) {
+    this.inicial = inicial;
     this.alfabeto = alfabeto;
     this.producciones = producciones;
     this.terminales = terminales;
@@ -31,10 +34,17 @@ class Modelo {
       let individuales = producciones.split("/");
       individuales.map((produccion) => {
         if (produccion.split("").some((x) => !this.alfabeto.includes(x)))
-          individuales = individuales.filter((x) => x != produccion);
+          individuales = individuales.filter((x) => {
+            //debugger;
+            return (
+              x != produccion ||
+              x.split("").some((x) => !isNaN(Number.parseInt(x)))
+            );
+          });
       });
       return individuales.join("/");
     });
+    console.log(this.producciones);
   }
 
   eliminarInalcanzables(inicial) {
@@ -50,7 +60,7 @@ class Modelo {
   }
 
   eliminarInalcanzablesR(inicial, anteriores, otras) {
-    if (!inicial) return anteriores;
+    if (!inicial || !isNaN(Number.parseInt(inicial))) return anteriores;
     let producciones = this.producciones[this.alfabeto.indexOf(inicial)]
       .split("")
       .concat(otras)
@@ -69,6 +79,15 @@ class Modelo {
       anteriores,
       producciones
     );
+  }
+
+  eliminarUndefined() {
+    this.producciones = this.producciones.map((produccion) => {
+      return produccion
+        .split("/")
+        .filter((x) => x != "undefined")
+        .join("/");
+    });
   }
 
   eliminarNulos() {
@@ -129,7 +148,10 @@ class Modelo {
           producciones = producciones
             .concat("/" + this.producciones[this.alfabeto.indexOf(produccion)])
             .split("/")
-            .filter((produccion) => produccion.length > 1)
+            .filter(
+              (produccion) =>
+                produccion.length > 1 || !isNaN(Number.parseInt(produccion))
+            )
             .join("/");
         }
       });
@@ -149,41 +171,61 @@ class Modelo {
   }
 
   chomsky() {
-    let indice = 0;
-    const chomsky = [];
-    for (let producciones of this.producciones) {
-      let individuales = producciones.split("/");
-      for (let produccion of individuales) {
-        if (produccion.length < 3) {
-          chomsky.push(produccion);
-        }else{
-            
+    this.producciones = this.producciones.map((producciones) => {
+      let produccion = producciones.split("/");
+      produccion = produccion.map((prod) => {
+        if (prod.length > 2 && typeof prod.split(prod.length) != Number) {
+          prod = this.chomskyRecursion(prod);
+          console.log(prod);
         }
-        console.log(individuales.join("/"));
-        indice++;
-      }
+        return prod;
+      });
+      console.log(produccion);
+      return produccion.join("/");
+    });
+    this.producciones = this.producciones.concat(this.produccionesAuxiliares);
+  }
+
+  chomskyRecursion(produccion) {
+    let variable = "R" + this.chomskyVar;
+    let produccionRecursiva = produccion.substring(1, produccion.length);
+    let nuevaProduccion = produccion.substring(0, 1) + "R" + this.chomskyVar;
+    this.chomskyVar++;
+    if (produccionRecursiva.length > 2) {
+      produccionRecursiva = this.chomskyRecursion(produccionRecursiva);
     }
+    this.alfabeto.push(variable);
+    this.produccionesAuxiliares.push(produccionRecursiva);
+    return nuevaProduccion;
   }
 }
 
 const model = new Modelo(
   ["A", "B", "Z", "C", "D"],
   [
-    "AB/DC/B/E/F/G/AED",
-    "CD/EC/λ",
-    "AD/CDA/DX/FG/λ",
-    "ABC/CDG/A/λ",
-    "AB/CD/XS/H",
+    "AB1C/DCB/B/E/F/G/AED/1",
+    "CDBA/EC/2/λ",
+    "AD/CD2A/DX/FG/3/λ",
+    "AB3C/CDG/A/4/λ",
+    "AB1/CD/XS/1/H",
   ],
   [1, 2, 3, 4]
 );
 
-model.crearMatriz();
+//model.crearMatriz();
 model.buscarNulas();
 model.eliminarInutiles();
+console.log("inutiles");
+model.crearMatriz();
 model.eliminarInalcanzables("B");
+console.log("inalcanzabkes");
+model.crearMatriz();
 model.eliminarNulos();
+console.log("nulos");
+model.crearMatriz();
 model.eliminarUnitarias();
+model.eliminarUndefined();
+console.log("unitarias");
 model.crearMatriz();
 model.chomsky();
 console.log("despues de chomsky");

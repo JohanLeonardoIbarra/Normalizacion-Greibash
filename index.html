@@ -1,12 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Normalizador de gramatica</title>
+  </head>
+  <body>
+    <header class="bg-blue-400 h-[20vh] flex">
+      <h1 class="text-white text-5xl self-center ml-[5vw]">
+        Normalizador de Gramatica
+      </h1>
+    </header>
+    <main>
+      <div class="flex flex-wrap justify-center w-[80vw] mx-[10vw]">
+        <table class="table table-striped border border-solid w-full">
+          <thead>
+            <tr>
+              <th>Variable No Terminal</th>
+              <th>Producciones</th>
+            </tr>
+          </thead>
+          <tbody id="notation"></tbody>
+        </table>
+        <button id="next" class="bg-blue-300 px-[5vw] text-white text-2xl">
+          Next
+        </button>
+      </div>
+    </main>
+    <div
+      id="modal"
+      class="modal w-full h-full flex align-center justify-center absolute top-[0]"
+    >
+      <form id="variables" class="self-center">
+        <div class="flex flex-wrap justify-center w-[60vw] h-[60vh] bg-blue-400 rounded-lg overflow-hidden">
+          <div class="text-white text-2xl pt-20 w-[70%]">
+            <label for="alfabeto">Digitar el Alfabeto:</label>
+            <input
+              name="alfabeto"
+              type="text"
+              class="form-control"
+              id="alfabeto"
+              onkeyup="this.value = this.value.toUpperCase()"
+              placeholder="A,B,C,D,E..."
+              required=""
+            />
+            <label for="estado">Elegir Estado Inicial:</label>
+            <input
+              name="estado"
+              type="text"
+              class="form-control"
+              id="estado"
+              onkeyup="this.value = this.value.toUpperCase()"
+              placeholder="A"
+              required=""
+            />
+            <label for="terminales">Digitar las Terminales:</label>
+            <input
+              name="terminales"
+              type="text"
+              class="form-control"
+              id="terminales"
+              onkeyup="this.value = this.value.toLowerCase()"
+              placeholder="1,2,3,4,5..."
+              required=""
+            />
+        </div>
+        <button class="bg-white text-blue-600 w-full" type="submit">Continuar</button>
+      </form>
+    </div>
+
     <script src="js/index.js"></script>
-</body>
+    <script src="js/controller.js"></script>
+  </body>
 </html>
