@@ -1,9 +1,96 @@
-.modal{
-    background: #00000080;
+*::-webkit-scrollbar{
+    background: #fff;
+}
+
+*::-webkit-scrollbar-thumb{
+    background: #60a5fa;
+    border-radius:10px;
 }
 
 input{
     color: #000000 !important;
     width: 100%;
     padding: 5px;
+    border: 1px solid #60a5fa;
+    border-radius: 10px;
+}
+
+.hide{
+    display: none !important;   
+}
+
+.ovy{
+    overflow-y: auto !important;
+}
+
+th input{
+    border-radius: 10px;
+    font-size: 1.2em;
+}
+
+body{
+    background-image: url(../img/C41.jpg);
+}
+
+.one{
+    background-position: left;
+}
+
+@keyframes two {
+    0%{
+        background-position: left;
+    }
+    100%{
+        background-position: center;
+    }
+}
+
+@keyframes three {
+    0%{
+        background-position: center;
+    }
+    100%{
+        background-position: right;
+    }
+}
+
+.two{
+    animation: two;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.three{
+    background-position: right;
+}
+
+.run-left{
+    animation: toleft;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+
+.show{
+    animation: show;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes show {
+    0%{
+        transform:translateX(100%);
+    }
+    100%{
+        transform:translateX(100%);
+    }
+}
+
+@keyframes toleft {
+    0%{
+
+    }
+    100%{
+        transform:translateX(-100%);
+    }
 }

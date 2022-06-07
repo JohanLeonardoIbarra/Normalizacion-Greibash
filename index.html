@@ -9,12 +9,49 @@
     <title>Normalizador de gramatica</title>
   </head>
   <body>
-    <header class="bg-blue-400 h-[20vh] flex">
-      <h1 class="text-white text-5xl self-center ml-[5vw]">
-        Normalizador de Gramatica
-      </h1>
-    </header>
-    <main>
+    <div
+    id="first-view"
+    class="w-full h-[100vh] flex justify-end "
+  >
+    <form id="variables" class="self-end m-[10%]">
+      <div class=" flex flex-wrap justify-center bg-white w-[40vw] h-[50vh] rounded-lg overflow-hidden border border-blue-400">
+        <div class="text-blue-400 text-2xl pt-20 w-[90%]">
+          <label for="alfabeto">Digitar el Alfabeto:</label>
+          <input
+            name="alfabeto"
+            type="text"
+            class="form-control"
+            id="alfabeto"
+            onkeyup="this.value = this.value.toUpperCase()"
+            placeholder="A,B,C,D,E..."
+            required=""
+          />
+          <label for="inicial">Elegir Estado Inicial:</label>
+          <input
+            name="inicial"
+            type="text"
+            class="form-control"
+            id="estado"
+            onkeyup="this.value = this.value.toUpperCase()"
+            placeholder="A"
+            required=""
+          />
+          <label for="terminales">Digitar las Terminales:</label>
+          <input
+            name="terminales"
+            type="text"
+            class="form-control"
+            id="terminales"
+            onkeyup="this.value = this.value.toLowerCase()"
+            placeholder="1,2,3,4,5..."
+            required=""
+          />
+      </div>
+      <button class="bg-blue-100 text-blue-600 w-full" type="submit">Continuar</button>
+    </form>
+  </div>
+
+    <div class="hide">
       <div class="flex flex-wrap justify-center w-[80vw] mx-[10vw]">
         <table class="table table-striped border border-solid w-full">
           <thead>
@@ -29,46 +66,33 @@
           Next
         </button>
       </div>
-    </main>
+    </div>
+
     <div
       id="modal"
-      class="modal w-full h-full flex align-center justify-center absolute top-[0]"
+      class="modal w-full h-full flex align-center justify-center absolute top-[0] producciones hide"
     >
-      <form id="variables" class="self-center">
-        <div class="flex flex-wrap justify-center w-[60vw] h-[60vh] bg-blue-400 rounded-lg overflow-hidden">
-          <div class="text-white text-2xl pt-20 w-[70%]">
-            <label for="alfabeto">Digitar el Alfabeto:</label>
-            <input
-              name="alfabeto"
-              type="text"
-              class="form-control"
-              id="alfabeto"
-              onkeyup="this.value = this.value.toUpperCase()"
-              placeholder="A,B,C,D,E..."
-              required=""
-            />
-            <label for="estado">Elegir Estado Inicial:</label>
-            <input
-              name="estado"
-              type="text"
-              class="form-control"
-              id="estado"
-              onkeyup="this.value = this.value.toUpperCase()"
-              placeholder="A"
-              required=""
-            />
-            <label for="terminales">Digitar las Terminales:</label>
-            <input
-              name="terminales"
-              type="text"
-              class="form-control"
-              id="terminales"
-              onkeyup="this.value = this.value.toLowerCase()"
-              placeholder="1,2,3,4,5..."
-              required=""
-            />
+      <form
+        id="formulario-producciones"
+        class="bg-blue-400 h-[80vh] w-[50vw] mt-[10vh] flex flex-wrap justify-center ovy"
+      >
+        <table class="w-[80%] self-center">
+          <thead>
+            <tr class="text-3xl text-white">
+              <th>Variable</th>
+              <th>Producciones</th>
+            </tr>
+          </thead>
+          <tbody id="producciones-tabla"></tbody>
+        </table>
+        <div class="w-full flex justify-between h-[40px] self-end">
+          <div class="px-[20px] text-3xl text-blue-400 bg-white">
+            λ
+          </div>
+          <button type="submit" class="bg-white text-blue-400 px-12 text-2xl">
+            Next
+          </button>
         </div>
-        <button class="bg-white text-blue-600 w-full" type="submit">Continuar</button>
       </form>
     </div>
 

@@ -2,8 +2,7 @@ class Modelo {
   alfabeto;
   producciones;
   terminales;
-
-  inicial = "";
+  inicial;
 
   nulas = [];
   produccionesTerminales = [];
@@ -47,8 +46,8 @@ class Modelo {
     console.log(this.producciones);
   }
 
-  eliminarInalcanzables(inicial) {
-    const depuradas = this.eliminarInalcanzablesR(inicial, []);
+  eliminarInalcanzables() {
+    const depuradas = this.eliminarInalcanzablesR(this.inicial, []);
     let eliminadas = this.alfabeto.filter(
       (x) => !depuradas.join("").includes(x)
     );
@@ -60,9 +59,15 @@ class Modelo {
   }
 
   eliminarInalcanzablesR(inicial, anteriores, otras) {
-    if (!inicial || !isNaN(Number.parseInt(inicial))) return anteriores;
+    if (!inicial) return anteriores;
+
+    console.log(this.producciones);
+    console.log(this.alfabeto);
+    console.log(this.producciones[this.alfabeto.indexOf(inicial)]);
+    console.log(inicial);
     let producciones = this.producciones[this.alfabeto.indexOf(inicial)]
       .split("")
+      .filter((x) => isNaN(Number.parseInt(x)))
       .concat(otras)
       .filter(
         (x) => x != "/" && x != inicial && !anteriores.some((z) => x == z)
@@ -162,6 +167,7 @@ class Modelo {
 
   buscarNulas() {
     let indices = [];
+    console.log(this.producciones);
     for (let index in this.producciones) {
       if (this.producciones[index].includes("λ")) {
         indices.push(this.alfabeto[index]);
@@ -180,7 +186,6 @@ class Modelo {
         }
         return prod;
       });
-      console.log(produccion);
       return produccion.join("/");
     });
     this.producciones = this.producciones.concat(this.produccionesAuxiliares);
@@ -201,24 +206,19 @@ class Modelo {
 }
 
 const model = new Modelo(
-  ["A", "B", "Z", "C", "D"],
-  [
-    "AB1C/DCB/B/E/F/G/AED/1",
-    "CDBA/EC/2/λ",
-    "AD/CD2A/DX/FG/3/λ",
-    "AB3C/CDG/A/4/λ",
-    "AB1/CD/XS/1/H",
-  ],
+  ["X", "Y", "Z", "W"],
+  "Y",
+  ["Z1W/1", "Z1W2/ZW/2", "XWX1/1/XX2/WZ", "1Z2Z/ZXX0/0"],
   [1, 2, 3, 4]
 );
 
-//model.crearMatriz();
+model.crearMatriz();
 model.buscarNulas();
 model.eliminarInutiles();
 console.log("inutiles");
 model.crearMatriz();
 model.eliminarInalcanzables("B");
-console.log("inalcanzabkes");
+console.log("inalcanzables");
 model.crearMatriz();
 model.eliminarNulos();
 console.log("nulos");
