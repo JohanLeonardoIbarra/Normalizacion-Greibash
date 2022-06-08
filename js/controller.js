@@ -1,25 +1,7 @@
-//const greibach = new Modelo();
-
-// document.getElementById("next").addEventListener("click", (e) => {
-//   print();
-// });
-
-// const print = () => {
-//   const tabla = document.getElementById("notation");
-//   tabla.innerHTML = `
-//         <td>
-//             A
-//         <td/>
-//         <td>
-//             ASDFDFG
-//         <td/>
-//     `;
-// };
-
 let alfa = [];
 let init = "";
 let terminal = [];
-let pro = [];
+let prod = [];
 
 const formulario = document.getElementById("variables");
 
@@ -69,7 +51,7 @@ const agregarProducciones = () => {
   alfa.forEach((terminal) => {
     produccionesTabla.innerHTML += `<tr>
       <th class="w-[30%]"><input class="text-center" type="text" value="${terminal}" readonly/></th>
-      <th class="w-[70%]"><input type="text" name="prod${count}" required placeholder="AB/CDA/T2T/1..." /></th></tr>`;
+      <th class="w-[70%]"><input type="text" name="prod${count}" onkeyup="this.value = this.value.toUpperCase()" required placeholder="AB/CDA/T2T/1..." /></th></tr>`;
     count++;
   });
   const form = document.getElementById("formulario-producciones");
@@ -80,8 +62,83 @@ const agregarProducciones = () => {
     const producciones = [...Array(count).keys()].map((x) => {
       return data.get("prod" + x);
     });
-    console.log(producciones);
+    document.getElementById("modal").classList.toggle("run-left2");
+
+    document.getElementById("view").classList.toggle("hide");
+    document.getElementById("view").classList.add("show2");
+    prod = producciones;
+    app();
   });
 };
 
-document.body.classList.add("one");
+const graficar = (resultados) => {
+  const results = document.getElementById("results");
+  results.innerHTML += template(resultados);
+};
+
+const resTemplate = (data) => {
+  return `
+  <tr>
+    <td>${data[0]}</td>
+    <td>${data[1]}</td>
+  <tr/>
+`;
+};
+
+const template = (data, desc, title) => {
+  return `<div class="message px-[10%] fade">
+  <h1 class="text-5xl">${title}</h1>
+  <p class="text-xl">${desc}</p>
+</div>
+<table class="border border-solid border-blue-400 w-[80%] fade">
+  <thead>
+    <tr>
+      <th>Variable No Terminal</th>
+      <th>Producciones</th>
+    </tr>
+  </thead>
+  <tbody id="notation">
+    ${data.map((x) => resTemplate(x)).join("")}
+  </tbody>
+</table>
+<hr>`;
+};
+
+let model;
+let c = 0;
+
+const app = () => {
+  if (c === 0) {
+    model = new Modelo(alfa, init, prod, terminal);
+    model.buscarNulas();
+    c++;
+    graficar(model.crearMatriz());
+  } else if (c === 1) {
+    model.eliminarInutiles();
+    c++;
+    graficar(model.crearMatriz());
+  } else if (c === 2) {
+    model.eliminarInalcanzables();
+    c++;
+    graficar(model.crearMatriz());
+  } else if (c === 3) {
+    model.eliminarNulos();
+    c++;
+    graficar(model.crearMatriz());
+  } else if (c === 4) {
+    model.eliminarUnitarias();
+    model.eliminarUndefined();
+    c++;
+    graficar(model.crearMatriz());
+  } else if (c === 5) {
+    model.chomsky();
+    c++;
+    graficar(model.crearMatriz());
+  }
+};
+
+const nextBtn = document.getElementById("next");
+
+nextBtn.addEventListener("click", () => {
+  app();
+});

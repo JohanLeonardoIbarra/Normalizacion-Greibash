@@ -60,11 +60,6 @@ class Modelo {
 
   eliminarInalcanzablesR(inicial, anteriores, otras) {
     if (!inicial) return anteriores;
-
-    console.log(this.producciones);
-    console.log(this.alfabeto);
-    console.log(this.producciones[this.alfabeto.indexOf(inicial)]);
-    console.log(inicial);
     let producciones = this.producciones[this.alfabeto.indexOf(inicial)]
       .split("")
       .filter((x) => isNaN(Number.parseInt(x)))
@@ -205,28 +200,28 @@ class Modelo {
   }
 }
 
-const model = new Modelo(
-  ["X", "Y", "Z", "W"],
-  "Y",
-  ["Z1W/1", "Z1W2/ZW/2", "XWX1/1/XX2/WZ", "1Z2Z/ZXX0/0"],
-  [1, 2, 3, 4]
-);
+// const model = new Modelo(
+//   ["X", "Y", "Z", "W"],
+//   "Y",
+//   ["Z1W/1", "Z1W2/ZW/2", "XWX1/1/XX2/WZ", "1Z2Z/ZXX0/0"],
+//   [1, 2, 3, 4]
+// );
 
-model.crearMatriz();
-model.buscarNulas();
-model.eliminarInutiles();
-console.log("inutiles");
-model.crearMatriz();
-model.eliminarInalcanzables("B");
-console.log("inalcanzables");
-model.crearMatriz();
-model.eliminarNulos();
-console.log("nulos");
-model.crearMatriz();
-model.eliminarUnitarias();
-model.eliminarUndefined();
-console.log("unitarias");
-model.crearMatriz();
-model.chomsky();
-console.log("despues de chomsky");
-model.crearMatriz();
+// model.crearMatriz();
+// model.buscarNulas();
+// model.eliminarInutiles();
+// console.log("inutiles");
+// model.crearMatriz();
+// model.eliminarInalcanzables("B");
+// console.log("inalcanzables");
+// model.crearMatriz();
+// model.eliminarNulos();
+// console.log("nulos");
+// model.crearMatriz();
+// model.eliminarUnitarias();
+// model.eliminarUndefined();
+// console.log("unitarias");
+// model.crearMatriz();
+// model.chomsky();
+// console.log("despues de chomsky");
+// model.crearMatriz();
