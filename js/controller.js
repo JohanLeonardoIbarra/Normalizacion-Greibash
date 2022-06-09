@@ -92,8 +92,9 @@ const graficar = (resultados, descripcion, titulo) => {
   const div = document.createElement("div");
   div.setAttribute(
     "class",
-    "w-[80%] border rounded-lg border-blue-400 my-6 animate__animated animate__fadeInDown"
+    "w-[80%] my-6 animate__animated animate__fadeInDown"
   );
+  div.setAttribute("id", "table"+c);
   div.innerHTML = template(resultados, descripcion, titulo);
   results.appendChild(div);
 };
@@ -136,7 +137,7 @@ const app = () => {
     c++;
     graficar(
       model.crearMatriz(),
-      "Variables y sus producciones previas a iniciar el proceso de normalizacion siguiendo paso a paso hata llegar a la forma normal de greibach",
+      "Variables y sus producciones previas a iniciar el proceso de normalizacion siguiendo paso a paso hata llegar a la forma normal de Greibach",
       "Gramatica"
     );
   } else if (c === 1) {
@@ -187,4 +188,5 @@ const nextBtn = document.getElementById("next");
 
 nextBtn.addEventListener("click", () => {
   app();
+  nextBtn.setAttribute("href", "#table"+c)
 });
