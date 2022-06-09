@@ -7,64 +7,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <title>Normalizador de gramatica</title>
 </head>
 
 <body>
-  <div id="first-view" class="w-full h-[100vh] flex justify-end">
-    <form id="variables" class="self-end m-[10%]" autocomplete="off">
-      <div
-        class=" flex flex-wrap justify-center bg-white w-[40vw] h-[50vh] rounded-lg overflow-hidden border border-blue-400">
-        <div class="text-blue-400 text-2xl pt-20 w-[90%]">
-          <label for="alfabeto">Digitar el Alfabeto:</label>
-          <input name="alfabeto" type="text" class="form-control" id="alfabeto"
-            onkeyup="this.value = this.value.toUpperCase()" placeholder="A,B,C,D,E..." required="" />
-          <label for="inicial">Elegir Estado Inicial:</label>
-          <input name="inicial" type="text" class="form-control" id="estado"
-            onkeyup="this.value = this.value.toUpperCase()" placeholder="A" required="" />
-          <label for="terminales">Digitar las Terminales:</label>
-          <input name="terminales" type="text" class="form-control" id="terminales"
-            onkeyup="this.value = this.value.toLowerCase()" placeholder="1,2,3,4,5..." required="" />
-        </div>
-        <button class="bg-blue-100 text-blue-600 w-full" type="submit">Continuar</button>
-    </form>
-  </div>
-
-  
-
-  <div id="modal" class="modal w-full h-full flex align-center justify-center absolute top-[0] producciones hide">
-    <form id="formulario-producciones"
-      class="bg-blue-400 h-[80vh] w-[50vw] mt-[10vh] flex flex-wrap justify-center ovy"
-      autocomplete="off">
-      <table class="w-[80%] self-center">
-        <thead>
-          <tr class="text-3xl text-white">
-            <th>Variable</th>
-            <th>Producciones</th>
-          </tr>
-        </thead>
-        <tbody id="producciones-tabla"></tbody>
-      </table>
-      <div class="w-full flex justify-between h-[40px] self-end">
-        <div class="px-[20px] text-3xl text-blue-400 bg-white">
-          λ
-        </div>
-        <button type="submit" class="bg-white text-blue-400 px-12 text-2xl">
-          Next
-        </button>
+  <div class="main">
+    <img src="img/bgUno.png" id="imgbg" class="one" alt="">
+    <div>
+      <div id="first-view" class="w-full h-[100vh] flex justify-end animate__animated animate__fadeIn">
+        <form id="variables" class="self-end m-[10%]" autocomplete="off">
+          <div
+            class=" flex flex-wrap justify-center bg-white w-[40vw] h-[50vh] rounded-lg overflow-hidden border border-blue-400">
+            <div class="text-blue-400 text-2xl pt-20 w-[90%]">
+              <label for="alfabeto">Digitar el Alfabeto:</label>
+              <input name="alfabeto" type="text" class="form-control" id="alfabeto"
+                onkeyup="this.value = this.value.toUpperCase()" placeholder="A,B,C,D,E..." required="" />
+              <label for="inicial">Elegir Estado Inicial:</label>
+              <input name="inicial" type="text" class="form-control" id="estado"
+                onkeyup="this.value = this.value.toUpperCase()" placeholder="A" required="" />
+              <label for="terminales">Digitar las Terminales:</label>
+              <input name="terminales" type="text" class="form-control" id="terminales"
+                onkeyup="this.value = this.value.toLowerCase()" placeholder="1,2,3,4,5..." required="" />
+            </div>
+            <button class="bg-blue-100 text-blue-600 w-full" type="submit">Continuar</button>
+        </form>
       </div>
-    </form>
-  </div>
+    </div>
 
-  <div class="hide" id="view">
-    <div class="flex flex-wrap justify-center bg-white rounded-lg w-[80vw] h-[80vh] my-[10vh] mx-[10vw] ovy">
-      <div class="results w-full flex justify-center flex-wrap fade mt-[5vh]" id="results">
-        <!-- Insertado por codigo -->
+    <div>
+      <div id="modal"
+        class="modal w-full h-full flex align-center justify-center absolute top-[0] animate__animated hide">
+        <form id="formulario-producciones"
+          class="bg-blue-400 h-[80vh] w-[50vw] mt-[10vh] flex flex-wrap justify-center ovy" autocomplete="off">
+          <table class="w-[80%] self-center">
+            <thead>
+              <tr class="text-3xl text-white">
+                <th>Variable</th>
+                <th>Producciones</th>
+              </tr>
+            </thead>
+            <tbody id="producciones-tabla"></tbody>
+          </table>
+          <div class="w-full flex justify-between h-[40px] self-end">
+            <div class="px-[20px] text-3xl text-blue-400 bg-white">
+              λ
+            </div>
+            <button type="submit" class="bg-white text-blue-400 px-12 text-2xl">
+              Next
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="w-full flex justify-center h-[5vh]">
-        <button id="next" class="bg-blue-300 px-[5vw] text-white text-2xl">
-          Next
-        </button>
+    </div>
+
+    <div>
+      <div class="hide animate__animated" id="view">
+        <div class="flex flex-wrap justify-center bg-white rounded-lg w-[80vw] h-[80vh] my-[10vh] mx-[10vw] ovy">
+          <div class="results w-full flex justify-center flex-wrap fade mt-[5vh]" id="results">
+            <!-- Insertado por codigo -->
+          </div>
+          <div class="w-full flex justify-center h-[5vh]">
+            <button id="next" class="bg-blue-300 px-[5vw] text-white text-2xl">
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

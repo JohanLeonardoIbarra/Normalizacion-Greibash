@@ -7,8 +7,6 @@
     border-radius:10px;
 }
 
-
-
 input{
     color: #000000 !important;
     width: 100%;
@@ -30,30 +28,16 @@ th input{
     font-size: 1.2em;
 }
 
-body{
-    background-image: url(../img/C41.jpg);
+.main img{
+    top: 0;
+    position: fixed;
+    height: 100vh;
+    object-fit: cover;
+    
 }
 
 .one{
-    background-position: left;
-}
-
-@keyframes two {
-    0%{
-        background-position: left;
-    }
-    100%{
-        background-position: center;
-    }
-}
-
-@keyframes three {
-    0%{
-        background-position: center;
-    }
-    100%{
-        background-position: right;
-    }
+    object-position: left;
 }
 
 .two{
@@ -63,78 +47,25 @@ body{
 }
 
 .three{
-    background-position: right;
-}
-
-.run-left{
-    animation: toleft;
+    animation: three;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
-.run-left2{
-    animation: toleft;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-}
-
-.show{
-    animation: show;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-.fade{
-    animation: fade;
-    animation-duration: 1s;
-}
-
-.show2{
-    animation: show2;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes show {
+@keyframes two {
     0%{
-        transform:translateX(100%);
+        object-position: left;
     }
     100%{
-        transform:translateX(100%);
+        object-position: center;
     }
 }
 
-@keyframes show2 {
+@keyframes three {
     0%{
-        transform:translateX(200%);
+        object-position: center;
     }
     100%{
-        transform:translateX(100%);
-    }
-}
-
-@keyframes toleft {
-    0%{
-
-    }
-    100%{
-        transform:translateX(-100%);
-    }
-}
-
-@keyframes toleft2 {
-    0%{
-    }
-    100%{
-        transform:translateX(-100%);
-    }
-}
-
-@keyframes fade {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
+        object-position: right;
     }
 }
