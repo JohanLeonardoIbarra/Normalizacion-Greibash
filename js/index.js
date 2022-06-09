@@ -32,12 +32,20 @@ class Modelo {
     this.producciones = this.producciones.map((producciones) => {
       let individuales = producciones.split("/");
       individuales.map((produccion) => {
-        if (produccion.split("").some((x) => !this.alfabeto.includes(x)))
+        if (produccion.split("").some((x) => {
+          let aux = false;
+          if(!this.alfabeto.includes(x) && !this.terminales.includes(x)){
+            console.log("alfa", !this.alfabeto.includes(x))
+            console.log("beta", !this.terminales.includes(x))
+
+            aux = true;
+          }
+          return aux
+        }))
           individuales = individuales.filter((x) => {
             //debugger;
             return (
-              x != produccion ||
-              x.split("").some((x) => !isNaN(Number.parseInt(x)))
+              x != produccion
             );
           });
       });

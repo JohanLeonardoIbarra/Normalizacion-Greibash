@@ -101,7 +101,7 @@ const graficar = (resultados, descripcion, titulo) => {
 
 const resTemplate = (data) => {
   return `
-  <tr">
+  <tr class="text-center">
     <td>${data[0]}</td>
     <td>${data[1]}</td>
   <tr/>
