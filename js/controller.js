@@ -92,7 +92,7 @@ const graficar = (resultados, descripcion, titulo) => {
   const div = document.createElement("div");
   div.setAttribute(
     "class",
-    "w-[80%] border rounded-lg border-blue-400 my-6 animate__animated animate__flipInX"
+    "w-[80%] border rounded-lg border-blue-400 my-6 animate__animated animate__fadeInDown"
   );
   div.innerHTML = template(resultados, descripcion, titulo);
   results.appendChild(div);
