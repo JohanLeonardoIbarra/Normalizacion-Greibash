@@ -172,7 +172,7 @@ class Modelo {
     let indices = [];
     console.log(this.producciones);
     for (let index in this.producciones) {
-      if (this.producciones[index].includes("λ")) {
+      if (this.producciones[index].includes("Λ")) {
         indices.push(this.alfabeto[index]);
       }
     }
