@@ -12,7 +12,10 @@ formulario.addEventListener("submit", (event) => {
   let inicial = data.get("inicial");
   let terminales = data.get("terminales");
 
-  if (alfabeto.split(",").includes("")||alfabeto.split(",").some(x => x.length > 1)) {
+  if (
+    alfabeto.split(",").includes("") ||
+    alfabeto.split(",").some((x) => x.length > 1)
+  ) {
     alert("El alfabeto debe esta separado por comas");
     return;
   }
@@ -20,7 +23,11 @@ formulario.addEventListener("submit", (event) => {
     alert("La variable inicial debe se una letra");
     return;
   }
-  if (terminales.split(",").includes("")||terminales.split(",").some(x => x.length > 1 || isNaN(Number.parseInt(x)))) {
+  if (
+    terminales.split(",").includes("") ||
+    terminales.split(",").some((x) => x.length > 1 || isNaN(Number.parseInt(x))
+    )
+  ) {
     alert("Las variables terminales deben ser numeros separados por comas");
     return;
   }
@@ -32,9 +39,19 @@ formulario.addEventListener("submit", (event) => {
   prods.classList.toggle("hide");
   prods.classList.add("animate__fadeInRight");
 
-  alfa = alfabeto.split(",");
+  alfa = alfabeto.split(",").reduce((acc, cur) => {
+    if (!acc.includes(cur)) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);
   init = inicial;
-  terminal = terminales.split(",");
+  terminal = terminales.split(",").reduce((acc, cur) => {
+    if (!acc.includes(cur)) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);;
 
   document.getElementById("imgbg").classList.remove("one");
   document.getElementById("imgbg").classList.add("two");
@@ -91,7 +108,7 @@ const graficar = (resultados, descripcion, titulo) => {
     "class",
     "w-[80%] my-6 animate__animated animate__fadeInDown"
   );
-  div.setAttribute("id", "table"+c);
+  div.setAttribute("id", "table" + c);
   div.innerHTML = template(resultados, descripcion, titulo);
   results.appendChild(div);
 };
@@ -178,22 +195,21 @@ const app = () => {
       "Normalizacion a la forma normal de chomsky generando variables con producciones de maximo 2 variables no terminales",
       "Forma Normal de Chomsky"
     );
-  }
-  else if (c === 6) {
+  } else if (c === 6) {
     c++;
     greibachDesc();
-    }
+  }
 };
 
 const greibachDesc = () => {
-  alert("Graficacion aun no disponible")
+  alert("Graficacion aun no disponible");
   const results = document.getElementById("results");
   const div = document.createElement("div");
   div.setAttribute(
     "class",
     "w-[80%] my-6 animate__animated animate__fadeInDown"
   );
-  div.setAttribute("id", "table"+c);
+  div.setAttribute("id", "table" + c);
   div.innerHTML = `
   <div class="message px-[10%] fade">
     <h1 class="text-5xl">Forma Normal de Greibach</h1>
@@ -214,11 +230,10 @@ A”.
   </div>
   `;
   results.appendChild(div);
-}
+};
 
 const nextBtn = document.getElementById("next");
 
 nextBtn.addEventListener("click", () => {
   app();
-  nextBtn.setAttribute("href", "#table"+c)
 });
