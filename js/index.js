@@ -207,29 +207,3 @@ class Modelo {
     return nuevaProduccion;
   }
 }
-
-// const model = new Modelo(
-//   ["X", "Y", "Z", "W"],
-//   "Y",
-//   ["Z1W/1", "Z1W2/ZW/2", "XWX1/1/XX2/WZ", "1Z2Z/ZXX0/0"],
-//   [1, 2, 3, 4]
-// );
-
-// model.crearMatriz();
-// model.buscarNulas();
-// model.eliminarInutiles();
-// console.log("inutiles");
-// model.crearMatriz();
-// model.eliminarInalcanzables("B");
-// console.log("inalcanzables");
-// model.crearMatriz();
-// model.eliminarNulos();
-// console.log("nulos");
-// model.crearMatriz();
-// model.eliminarUnitarias();
-// model.eliminarUndefined();
-// console.log("unitarias");
-// model.crearMatriz();
-// model.chomsky();
-// console.log("despues de chomsky");
-// model.crearMatriz();

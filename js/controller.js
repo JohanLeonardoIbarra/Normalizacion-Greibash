@@ -12,7 +12,7 @@ formulario.addEventListener("submit", (event) => {
   let inicial = data.get("inicial");
   let terminales = data.get("terminales");
 
-  if (!alfabeto.includes(",")) {
+  if (alfabeto.split(",").includes("")||alfabeto.split(",").some(x => x.length > 1)) {
     alert("El alfabeto debe esta separado por comas");
     return;
   }
@@ -20,10 +20,7 @@ formulario.addEventListener("submit", (event) => {
     alert("La variable inicial debe se una letra");
     return;
   }
-  if (
-    !terminales.includes(",") ||
-    terminales.split(",").some((x) => isNaN(Number.parseInt(x)))
-  ) {
+  if (terminales.split(",").includes("")||terminales.split(",").some(x => x.length > 1 || isNaN(Number.parseInt(x)))) {
     alert("Las variables terminales deben ser numeros separados por comas");
     return;
   }
