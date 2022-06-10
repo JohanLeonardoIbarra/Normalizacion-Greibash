@@ -179,7 +179,42 @@ const app = () => {
       "Forma Normal de Chomsky"
     );
   }
+  else if (c === 6) {
+    c++;
+    greibachDesc();
+    }
 };
+
+const greibachDesc = () => {
+  alert("Graficacion aun no disponible")
+  const results = document.getElementById("results");
+  const div = document.createElement("div");
+  div.setAttribute(
+    "class",
+    "w-[80%] my-6 animate__animated animate__fadeInDown"
+  );
+  div.setAttribute("id", "table"+c);
+  div.innerHTML = `
+  <div class="message px-[10%] fade">
+    <h1 class="text-5xl">Forma Normal de Greibach</h1>
+    <br/>
+    <p class="text-xl mt-6">Para la normalizacion de Greibach se busca que todas las producciones 
+    inicien con un terminal y que éste vaya seguido por una subcadena (que puede ser lambda) 
+    de auxiliares.</p>
+    <br/>
+    <code class="my-6">
+    “Todo LCL L, λ 6∈ L, se puede generar por una GCL en la que todas sus producciones
+tienen el siguiente formato:
+A → aα
+donde A es un símbolo auxiliar, a es un símbolo terminal y α es una cadena de Σ
+∗
+A”.
+
+    </code>
+  </div>
+  `;
+  results.appendChild(div);
+}
 
 const nextBtn = document.getElementById("next");
 
